@@ -45,7 +45,7 @@ function App() {
       parsed.forEach((r) => {
         const newToast: Toast = {
           id: Date.now() + Math.random(),
-          message: `Supervisor routed to: ${r.agent.toUpperCase()}`,
+          message: `Supervisor routed to: ${r.agent.toUpperCase()} AGENT`,
           agent: r.agent,
         };
         setToasts((prev) => [...prev, newToast]);
@@ -94,7 +94,7 @@ function App() {
             <div key={i} className={`agent-card ${r.agent} glow`}>
               <div className="agent-header">
                 <span className={`agent-badge ${r.agent}`}>
-                  {r.agent.toUpperCase()}
+                  {`${r.agent.toUpperCase()} AGENT`}
                 </span>
               </div>
               <pre className="agent-text">{r.text}</pre>
