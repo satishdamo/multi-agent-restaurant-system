@@ -1,1 +1,1 @@
-# multi-agent-restaurant-system
+# multi-agent-restaurant-assistant
