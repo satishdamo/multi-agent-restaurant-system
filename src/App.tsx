@@ -18,6 +18,14 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [toasts, setToasts] = useState<Toast[]>([]);
 
+  const sampleQueries = [
+    { text: "🍕 Order a pizza from Domino's" },
+    { text: "🥗 Suggest healthy dishes" },
+    { text: "🛒 Check my order status" },
+    { text: "🍲 Show today's special menu" },
+    { text: "⚠️ Report a complaint about delivery" },
+  ];
+
   const sendQuery = async () => {
     if (!query.trim()) return;
     setLoading(true);
@@ -29,7 +37,6 @@ function App() {
       });
       const data: { response: string } = await res.json();
 
-      // Extract all agent responses
       const matches = [
         ...data.response.matchAll(
           /(\w+)\s*Agent:\s*(.+?)(?=\n\w+\s*Agent:|$)/gs,
@@ -41,7 +48,6 @@ function App() {
       }));
       setResponses(parsed);
 
-      // Toasts for each agent
       parsed.forEach((r) => {
         const newToast: Toast = {
           id: Date.now() + Math.random(),
@@ -49,8 +55,6 @@ function App() {
           agent: r.agent,
         };
         setToasts((prev) => [...prev, newToast]);
-
-        // Auto-remove after 5s
         setTimeout(() => {
           setToasts((prev) => prev.filter((t) => t.id !== newToast.id));
         }, 5000);
@@ -62,31 +66,60 @@ function App() {
     }
   };
 
+  const clearQuery = () => {
+    setQuery("");
+  };
+
   return (
     <div className="container">
-      {/* Sticky wrapper for heading + query */}
       <div className="sticky-top">
         <header className="header">
-          <h1>🤖 Multi‑Agentic Restaurant Assistant</h1>
-          <p>Visualizing LangGraph orchestration system</p>
+          <h1>🤖🍽️ Multi‑Agentic Restaurant Assistant</h1>
+          <p>Serving smart orchestration with LangGraph</p>
         </header>
 
         <section className="query-section">
           <h2>💬 Submit a Query</h2>
           <div className="query-box">
             <textarea
+              aria-label="Query input"
               value={query}
               onChange={(e) => setQuery(e.target.value)}
-              placeholder="Ask something like: 'Suggest dishes and check my order status'"
+              placeholder="🥘 Ask: 'Suggest dishes and check my order status'"
             />
-            <button onClick={sendQuery} disabled={loading}>
-              {loading ? "Routing..." : "Send"}
-            </button>
+            <div className="query-actions">
+              <button
+                aria-label="Send query"
+                onClick={sendQuery}
+                disabled={loading}
+              >
+                {loading ? "🍕 Preparing..." : "🍴 Send"}
+              </button>
+              <button
+                aria-label="Clear query"
+                className="clear-btn"
+                onClick={clearQuery}
+              >
+                ❌ Clear
+              </button>
+            </div>
+          </div>
+
+          {/* Sample Queries as Cards */}
+          <div className="sample-cards">
+            {sampleQueries.map((q, i) => (
+              <div
+                key={i}
+                className="sample-card"
+                onClick={() => setQuery(q.text)}
+              >
+                <p>{q.text}</p>
+              </div>
+            ))}
           </div>
         </section>
       </div>
 
-      {/* Scrollable responses below sticky block */}
       <section className="response-section">
         {responses.length > 0 && <h2>Supervisor Response</h2>}
         <div className="agent-grid">
@@ -94,23 +127,36 @@ function App() {
             <div key={i} className={`agent-card ${r.agent} glow`}>
               <div className="agent-header">
                 <span className={`agent-badge ${r.agent}`}>
-                  {`${r.agent.toUpperCase()} AGENT`}
+                  {r.agent === "menu" && "🍲 MENU"}
+                  {r.agent === "ordering" && "🛒 ORDERING"}
+                  {r.agent === "grievance" && "⚠️ GRIEVANCE"}
                 </span>
               </div>
-              <pre className="agent-text">{r.text}</pre>
+              <pre className="agent-text">
+                {r.agent === "menu" && "🍲 "}
+                {r.agent === "ordering" && "🛒 "}
+                {r.agent === "grievance" && "⚠️ "}
+                {r.text}
+              </pre>
             </div>
           ))}
         </div>
       </section>
 
-      {/* Toast notifications */}
       <div className="toast-container">
         {toasts.map((toast) => (
-          <div key={toast.id} className={`toast ${toast.agent}`}>
+          <div key={toast.id} className={`toast ${toast.agent} fade-in`}>
+            {toast.agent === "menu" && "🍲 "}
+            {toast.agent === "ordering" && "🛒 "}
+            {toast.agent === "grievance" && "⚠️ "}
             {toast.message}
           </div>
         ))}
       </div>
+
+      <footer className="footer">
+        <p>🍕 Powered by LangGraph • Restaurant AI Assistant 🍴</p>
+      </footer>
     </div>
   );
 }
