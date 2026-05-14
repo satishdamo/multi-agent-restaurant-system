@@ -19,11 +19,15 @@ function App() {
   const [toasts, setToasts] = useState<Toast[]>([]);
 
   const sampleQueries = [
-    { text: "🍕 Order a pizza from Domino's" },
-    { text: "🥗 Suggest healthy dishes" },
-    { text: "🛒 Check my order status" },
-    { text: "🍲 Show today's special menu" },
-    { text: "⚠️ Report a complaint about delivery" },
+    {
+      text: "🍕 Can you suggest me healthy Italian dishes? and order a pizza?",
+    },
+    {
+      text: "🥗 Can you Order me Hyderbad Briyani and suggest me some healthy side snackes?",
+    },
+    { text: "🛒 Check my order status and update me on the delivery timeline" },
+    { text: "🍲 Show today's special menu and order a dish" },
+    { text: "⚠️ Report a complaint about delivery and order me a replacement" },
   ];
 
   const sendQuery = async () => {
@@ -127,9 +131,9 @@ function App() {
             <div key={i} className={`agent-card ${r.agent} glow`}>
               <div className="agent-header">
                 <span className={`agent-badge ${r.agent}`}>
-                  {r.agent === "menu" && "🍲 MENU"}
-                  {r.agent === "ordering" && "🛒 ORDERING"}
-                  {r.agent === "grievance" && "⚠️ GRIEVANCE"}
+                  {r.agent === "menu" && "🍲 MENU AGENT"}
+                  {r.agent === "ordering" && "🛒 ORDERING AGENT"}
+                  {r.agent === "grievance" && "⚠️ GRIEVANCE AGENT"}
                 </span>
               </div>
               <pre className="agent-text">
