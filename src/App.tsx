@@ -136,12 +136,7 @@ function App() {
                   {r.agent === "grievance" && "⚠️ GRIEVANCE AGENT"}
                 </span>
               </div>
-              <pre className="agent-text">
-                {r.agent === "menu" && "🍲 "}
-                {r.agent === "ordering" && "🛒 "}
-                {r.agent === "grievance" && "⚠️ "}
-                {r.text}
-              </pre>
+              <pre className="agent-text">{r.text}</pre>
             </div>
           ))}
         </div>
