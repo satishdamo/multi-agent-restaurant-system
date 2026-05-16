@@ -20,12 +20,14 @@ function App() {
 
   const sampleQueries = [
     {
-      text: "🍕 Can you suggest me healthy Italian dishes? and order a pizza?",
+      text: "🍕 Can you suggest me healthy Italian dishes and order a pizza?",
     },
     {
-      text: "🥗 Can you Order me Hyderbad Briyani and suggest me some healthy side snacks?",
+      text: "🥗 Can you order me Hyderbad Briyani and suggest me some tasty side dishes?",
     },
-    { text: "🛒 Check my order status and update me on the delivery timeline" },
+    {
+      text: "🛒 Check my order status and update me on the delivery timeline, may I know why it has taken long?",
+    },
     { text: "🍲 Show today's special menu and order a dish" },
     { text: "⚠️ Report a complaint about delivery and order me a replacement" },
   ];
