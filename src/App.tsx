@@ -23,7 +23,7 @@ function App() {
       text: "🍕 Can you suggest me healthy Italian dishes? and order a pizza?",
     },
     {
-      text: "🥗 Can you Order me Hyderbad Briyani and suggest me some healthy side snackes?",
+      text: "🥗 Can you Order me Hyderbad Briyani and suggest me some healthy side snacks?",
     },
     { text: "🛒 Check my order status and update me on the delivery timeline" },
     { text: "🍲 Show today's special menu and order a dish" },
@@ -76,6 +76,20 @@ function App() {
 
   return (
     <div className="container">
+      {/* Floating corner SVG icons */}
+      <div className="corner-icon corner-top-left">
+        <img src="/images/plate-svgrepo-com.svg" alt="Plate" />
+      </div>
+      <div className="corner-icon corner-top-right">
+        <img src="/images/juice-svgrepo-com.svg" alt="Juice" />
+      </div>
+      <div className="corner-icon corner-bottom-left">
+        <img src="/images/salad-svgrepo-com.svg" alt="Salad" />
+      </div>
+      <div className="corner-icon corner-bottom-right">
+        <img src="/images/pizza-svgrepo-com.svg" alt="Pizza" />
+      </div>
+
       <div className="sticky-top">
         <header className="header">
           <h1>🤖🍽️ Multi‑Agentic Restaurant Assistant</h1>
@@ -96,6 +110,7 @@ function App() {
                 aria-label="Send query"
                 onClick={sendQuery}
                 disabled={loading}
+                className="send-btn"
               >
                 {loading ? "🍕 Preparing..." : "🍴 Send"}
               </button>

@@ -5,51 +5,54 @@
   box-sizing: border-box;
 }
 
-/* Animated Warm Background with Floating Pizza */
+/* Calm Restaurant Background */
 body {
   font-family: "Nunito", sans-serif;
-  background: linear-gradient(-45deg, #ffecd2, #fcb69f, #ff9a9e, #fecfef);
-  background-size: 400% 400%;
-  /* animation: gradientShift 20s ease infinite; */
+  background: #fff8f0; /* soft cream tone */
   color: #333;
   min-height: 100vh;
-  padding: 0;
   position: relative;
   overflow-x: hidden;
 }
 
-@keyframes gradientShift {
-  0% {
-    background-position: 0% 50%;
-  }
-  50% {
-    background-position: 100% 50%;
-  }
-  100% {
-    background-position: 0% 50%;
-  }
-}
-
-/* Floating Pizza Emoji Animation */
-body::before {
-  content: "🍕 🍕 🍕 🍕 🍕";
+/* Floating Corner SVGs */
+.corner-icon {
   position: absolute;
-  top: -50px;
-  left: 0;
-  width: 100%;
-  font-size: 2.5rem;
-  text-align: center;
-  animation: floatPizza 25s linear infinite;
-  opacity: 0.15; /* subtle, not distracting */
+  width: 80px;
+  height: 80px;
+  opacity: 0.25;
+  animation: floatIcon 5s ease-in-out infinite alternate;
   pointer-events: none;
 }
 
-@keyframes floatPizza {
-  0% {
-    transform: translateY(0);
+.corner-icon img {
+  width: 100%;
+  height: 100%;
+}
+
+.corner-top-left {
+  top: 20px;
+  left: 20px;
+}
+.corner-top-right {
+  top: 20px;
+  right: 20px;
+}
+.corner-bottom-left {
+  bottom: 20px;
+  left: 20px;
+}
+.corner-bottom-right {
+  bottom: 20px;
+  right: 20px;
+}
+
+@keyframes floatIcon {
+  from {
+    transform: translateY(0) translateX(0);
   }
-  100% {
-    transform: translateY(90vh);
+  to {
+    transform: translateY(12px) translateX(8px);
   }
 }
 
@@ -57,20 +60,20 @@ body::before {
 .container {
   max-width: 1200px;
   margin: 0 auto;
-  padding: 60px 20px 40px;
+  padding: 40px 20px;
   position: relative;
-  z-index: 1; /* keep content above pizza animation */
+  z-index: 1;
 }
 
 /* Header */
 .header {
   text-align: center;
-  margin-bottom: 40px;
+  margin-bottom: 30px;
 }
 
 .header h1 {
-  font-family: "Lobster", cursive;
-  font-size: 2.8em;
+  font-family: "Nunito", sans-serif;
+  font-size: 2.2em;
   background: linear-gradient(90deg, #d35400, #e67e22);
   -webkit-background-clip: text;
 }
@@ -78,38 +81,39 @@ body::before {
 .header p {
   font-family: "Nunito", sans-serif;
   color: #444;
-  font-size: 1.2em;
-  margin-top: 10px;
+  font-size: 1em;
+  margin-top: 8px;
 }
 
 /* Query Section */
 .query-section {
-  background: rgba(255, 255, 255, 0.9);
-  border-radius: 15px;
-  padding: 30px;
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
-  margin-bottom: 50px;
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 24px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 30px;
 }
 
 .query-section h2 {
   font-family: "Nunito", sans-serif;
   color: #d35400;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-size: 1.2em;
 }
 
 .query-box {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 12px;
 }
 
 .query-box textarea {
   width: 100%;
-  min-height: 140px;
-  font-size: 1.1em;
+  min-height: 100px;
+  font-size: 1em;
   border: 1px solid #ddd;
   border-radius: 10px;
-  padding: 15px;
+  padding: 12px;
   background: #fff8f0;
   color: #333;
   resize: vertical;
@@ -120,84 +124,142 @@ body::before {
   color: #999;
 }
 
-.query-box button {
-  align-self: flex-end;
-  font-family: "Nunito", sans-serif;
-  background: linear-gradient(135deg, #e67e22, #d35400);
-  color: white;
+/* Query Actions */
+.query-actions {
+  display: flex;
+  gap: 20px; /* spacing between buttons */
+  margin-top: 16px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.query-box button,
+.clear-btn {
+  flex: 1;
+  min-width: 120px;
+  padding: 12px 22px;
+  font-size: 1em;
+  border-radius: 10px;
   border: none;
-  padding: 12px 28px;
-  font-size: 1.1em;
-  border-radius: 8px;
   cursor: pointer;
   transition:
     transform 0.2s ease,
-    background 0.3s ease;
+    box-shadow 0.3s ease;
+  font-family: "Nunito", sans-serif;
+  font-weight: 600;
+}
+
+/* Send Button */
+.query-box button {
+  background: linear-gradient(135deg, #e67e22, #d35400); /* deeper orange */
+  color: #fff;
 }
 
 .query-box button:hover:not(:disabled) {
   transform: scale(1.05);
-  background: linear-gradient(135deg, #d35400, #e67e22);
+  box-shadow: 0 4px 12px rgba(211, 84, 0, 0.4);
 }
 
 .query-box button:disabled {
-  opacity: 0.6;
+  opacity: 0.85; /* less faded */
   cursor: not-allowed;
+}
+
+/* Clear Button */
+.clear-btn {
+  background: linear-gradient(
+    135deg,
+    #43cea2,
+    #185a9d
+  ); /* teal-blue gradient */
+  color: #fff;
+}
+
+.clear-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 12px rgba(24, 90, 157, 0.4);
+}
+
+/* Sample Query Cards */
+.sample-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 18px;
+  margin-top: 20px;
+}
+
+.sample-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 16px;
+  text-align: center;
+  font-family: "Nunito", sans-serif;
+  font-size: 0.95em;
+  cursor: pointer;
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.3s ease;
+  box-shadow: 3px 4px 11px 10px rgba(0, 0, 0, 0.08);
+}
+
+.sample-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 16px rgba(0, 0, 0, 0.12);
 }
 
 /* Response Section */
 .response-section h2 {
   font-family: "Nunito", sans-serif;
   color: #d35400;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
+  font-size: 1.2em;
 }
 
 .agent-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-  gap: 25px;
+  grid-template-columns: 1fr;
+  gap: 20px;
 }
 
 .agent-card {
-  background: #fff8f0;
-  border-radius: 15px;
-  padding: 20px;
-  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+  background: #fff;
+  border-radius: 12px;
+  padding: 15px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   transition: transform 0.3s ease;
-  position: relative;
 }
 
 .agent-card:hover {
-  transform: translateY(-5px);
+  transform: translateY(-3px);
 }
 
 .agent-header {
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .agent-badge {
-  padding: 6px 14px;
+  padding: 5px 12px;
   border-radius: 20px;
   font-weight: bold;
-  font-size: 0.95em;
-  color: black;
+  font-size: 0.9em;
+  color: #fff;
   font-family: "Nunito", sans-serif;
 }
 
 /* Agent Colors + Glow */
 .agent-card.ordering.glow {
   border: 2px solid #27ae60;
-  box-shadow: 0 0 15px #27ae60;
+  box-shadow: 0 0 10px #27ae60;
 }
 
 .agent-card.menu.glow {
   border: 2px solid #e67e22;
-  box-shadow: 0 0 15px #e67e22;
+  box-shadow: 0 0 10px #e67e22;
 }
 
 .agent-card.grievance.glow {
   border: 2px solid #c0392b;
-  box-shadow: 0 0 15px #c0392b;
+  box-shadow: 0 0 10px #c0392b;
 }
 
 /* Agent Text */
@@ -205,30 +267,32 @@ body::before {
   white-space: pre-wrap;
   font-family: "Courier Prime", monospace;
   color: #444;
-  line-height: 1.5;
+  line-height: 1.4;
+  font-size: 0.9em;
 }
 
 /* Toast Container */
 .toast-container {
   position: fixed;
-  bottom: 20px;
+  bottom: 15px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 8px;
   z-index: 1000;
 }
 
 .toast {
   color: white;
-  padding: 12px 20px;
+  padding: 10px 16px;
   border-radius: 8px;
   font-weight: bold;
   font-family: "Nunito", sans-serif;
   animation:
     slideUp 0.5s ease,
     fadeOut 0.5s ease 4.5s forwards;
+  font-size: 0.9em;
 }
 
 .toast.ordering {
@@ -243,7 +307,7 @@ body::before {
 
 @keyframes slideUp {
   from {
-    transform: translateY(30px);
+    transform: translateY(20px);
     opacity: 0;
   }
   to {
@@ -255,108 +319,35 @@ body::before {
 @keyframes fadeOut {
   to {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateY(20px);
   }
 }
 
 /* Footer */
 .footer {
   text-align: center;
-  margin-top: 40px;
-  font-size: 0.9em;
+  margin-top: 30px;
+  font-size: 0.85em;
   color: #555;
   font-family: "Nunito", sans-serif;
 }
 
-/* Query Actions */
-.query-actions {
-  display: flex;
-  gap: 10px;
-  margin-top: 10px;
-}
-
-.clear-btn {
-  background: #c0392b;
-  color: white;
-  border: none;
-  padding: 10px 20px;
-  font-size: 0.95em;
-  border-radius: 8px;
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    background 0.3s ease;
-}
-
-.clear-btn:hover {
-  transform: scale(1.05);
-  background: #e74c3c;
-}
-
-/* Sample Query Cards */
-.sample-cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 15px;
-  margin-top: 25px;
-}
-
-.sample-card {
-  background: #fff8f0;
-  border: 1px solid #e67e22;
-  border-radius: 12px;
-  padding: 15px;
-  text-align: center;
-  font-family: "Nunito", sans-serif;
-  font-size: 1em;
-  cursor: pointer;
-  transition:
-    transform 0.2s ease,
-    box-shadow 0.3s ease;
-}
-
-.sample-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
-}
-
 /* 📱 Mobile Responsiveness */
 @media (max-width: 768px) {
-  .container {
-    padding: 40px 15px 20px;
-  }
-
   .header h1 {
-    font-size: 2em;
+    font-size: 1.6em;
   }
-
-  .header p {
-    font-size: 1em;
-  }
-
-  .query-section {
-    padding: 20px;
-  }
-
   .query-box textarea {
-    min-height: 100px;
-    font-size: 0.95em;
-  }
-
-  .query-box button {
-    font-size: 0.95em;
-    padding: 10px 20px;
-  }
-
-  .agent-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .agent-card {
-    padding: 15px;
-  }
-
-  .agent-text {
+    min-height: 80px;
     font-size: 0.9em;
+  }
+  .query-box button,
+  .clear-btn {
+    font-size: 0.9em;
+    padding: 10px;
+  }
+  .sample-card {
+    font-size: 0.85em;
+    padding: 12px;
   }
 }
